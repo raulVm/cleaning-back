@@ -17,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('/catalogo/estados', 'Cat\CatalogoController@getEstados');
+Route::get('catalogo/municipios/{id}', 'Cat\CatalogoController@getMunicipios');
+Route::get('catalogo/localidades/{cve_edo}/{cve_mun}', 'Cat\CatalogoController@getLocalidades');
+Route::get('catalogo/colonias/{cve_edo}/{cve_mun}', 'Cat\CatalogoController@getColonias');
