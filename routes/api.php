@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Cat\CatalogoController;
+use App\Http\Controllers\SolicitudesController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,5 +22,7 @@ Route::get('/catalogo/estados', [CatalogoController::class, 'getEstados']);
 Route::get('catalogo/municipios/{id}', [CatalogoController::class, 'getMunicipios']);
 Route::get('catalogo/localidades/{cve_edo}/{cve_mun}', [CatalogoController::class, 'getLocalidades']);
 Route::get('catalogo/colonias/{cve_edo}/{cve_mun}', [CatalogoController::class, 'getColonias']);
+
+Route::post('saveSolicitud',[SolicitudesController::class, 'saveSolicitud']);
 
 ?>

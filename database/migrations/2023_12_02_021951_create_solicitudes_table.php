@@ -17,8 +17,14 @@ return new class extends Migration
             $table->increments('id');
             $table->integer('id_usuario');
             $table->string('nombre_completo');
-            $table->string('fecha');
-            $table->integer('id_cat_solicitud');
+            $table->string('correo_electronico');
+            $table->integer('telefono');
+            $table->integer('id_estado');
+            $table->integer('id_municipio');
+            $table->integer('id_localidad');
+            $table->integer('id_colonia');
+            $table->string('servicio');
+            $table->string('descripcion');
             $table->string('estatus');
             $table->timestamps();
         });
