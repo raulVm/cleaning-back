@@ -15,14 +15,14 @@ return new class extends Migration
     {
         Schema::create('solicitudes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_usuario');
+            $table->integer('id_usuario')->nullable();
             $table->string('nombre_completo');
             $table->string('correo_electronico');
-            $table->integer('telefono');
+            $table->string('telefono');
             $table->integer('id_estado');
             $table->integer('id_municipio');
-            $table->integer('id_localidad');
-            $table->integer('id_colonia');
+            $table->integer('id_localidad')->nullable();
+            $table->integer('id_colonia')->nullable();
             $table->string('servicio');
             $table->string('descripcion');
             $table->string('estatus');

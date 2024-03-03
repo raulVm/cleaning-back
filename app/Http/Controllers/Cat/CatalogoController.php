@@ -79,7 +79,7 @@ class CatalogoController extends Controller
     public function getMunicipios($idEstado)
     {
         // dd(Cache::store('file')->has('municipios-'.$idEstado));
-        if (Cache::store('file')->has('municipios-'.$idEstado)) {
+        if (!Cache::store('file')->has('municipios-'.$idEstado)) {
             Cache::store('file')->put('municipios-'.$idEstado, 
                 \App\Models\Catalogos\CatMunicipio::select('cve_mun', 'nombre')
                 ->where('cve_ent',$idEstado)->get()

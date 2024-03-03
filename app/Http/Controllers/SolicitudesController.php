@@ -62,25 +62,28 @@ class SolicitudesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //estatus: RECIBIDO, ASIGNADO, PROCESO, ATENDIDO, CANCELADO
     }
     public function saveSolicitud(Request $request){
         try{
-            // dd($request);
-            $nuevaSolicitud = new saveSolicitud;
-    
+            DB::beginTransaction();
+            $nuevaSolicitud = new Solicitud;
+            
             $nuevaSolicitud->nombre_completo       = $request['nombre_completo'];
             $nuevaSolicitud->correo_electronico    = $request['correo_electronico'];
             $nuevaSolicitud->telefono              = $request['telefono'];
             $nuevaSolicitud->id_estado             = $request['id_estado']['id'];
             $nuevaSolicitud->id_municipio          = $request['id_municipio']['cve_mun'];
-            $nuevaSolicitud->id_localidad          = $request['id_localidad']['cve_loc'];
-            $nuevaSolicitud->id_colonia            = $request['id_colonia']['id'];
-            $nuevaSolicitud->servicio              = $request['servicio'];
+            $nuevaSolicitud->id_localidad          = ($request['id_localidad'])? $request['id_localidad']['cve_loc']: null;
+            $nuevaSolicitud->id_colonia            = ($request['id_colonia'])? $request['id_colonia']['id']: null;
+            $nuevaSolicitud->servicio              = json_encode($request['servicio']);
             $nuevaSolicitud->descripcion           = $request['descripcion'];
+            $nuevaSolicitud->estatus               = "RECIBIDO";
             $nuevaSolicitud->save();
-            return response()->json(['message' => 'Datos guardados correctamente'],200);
+            DB::commit();
+            return response()->json(['message' => 'Solicitud se ha enviado correctamente'],200);
         }catch(\PDOException $e){
+            DB::rollback();
             return response()->json(['message' => $e->getMessage()],500);
         }
     }
